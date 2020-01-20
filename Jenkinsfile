@@ -1,6 +1,8 @@
 pipeline {
 
-  agent any
+  agent {
+        docker { image 'joao29a/jnlp-slave-alpine-docker' }
+    } 
 
   environment {
     registry = "172.17.0.2:5000/alikoo/web"
