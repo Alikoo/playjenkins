@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    registry = "192.168.1.81:5000/justme/myweb"
+    registry = "regisrty:5000/myweb"
     dockerImage = ""
   }
 
@@ -11,14 +11,14 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/justmeandopensource/playjenkins.git'
+        git 'https://github.com/Alikoo/playjenkins.git'
       }
     }
 
     stage('Build image') {
       steps{
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry + ":latest"
         }
       }
     }
@@ -36,7 +36,7 @@ pipeline {
     stage('Deploy App') {
       steps {
         script {
-          kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
+          kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "kubeconfig")
         }
       }
     }
