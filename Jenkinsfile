@@ -5,17 +5,19 @@ pipeline {
     dockerImage = ""
   }
 
-  agent { label 'kubepods' }
+  agent none
 
   stages {
 
     stage('Checkout Source') {
+      agent { label 'kubepods' }
       steps {
         git 'https://github.com/Alikoo/playjenkins.git'
       }
     }
 
     stage('Build image') {
+      agent { label 'kubepods' }
       steps{
         script {
           dockerImage = docker.build registry + ":latest"
@@ -24,6 +26,7 @@ pipeline {
     }
 
     stage('Push Image') {
+      agent { label 'kubepods' }
       steps{
         //sh 'ping -c 3 registry'
         sh 'cat /etc/hosts'
