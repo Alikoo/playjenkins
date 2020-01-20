@@ -25,7 +25,7 @@ pipeline {
 
     stage('Push Image') {
       steps{
-        sh 'ping -c 3 registry'
+        //sh 'ping -c 3 registry'
         sh 'cat /etc/hosts'
 
         script {
