@@ -1,11 +1,11 @@
 pipeline {
 
+  agent any
+
   environment {
-    registry = "172.17.0.2:5000/myweb"
+    registry = "172.17.0.2:5000/alikoo/web"
     dockerImage = ""
   }
-
-  agent { label 'kubepods' }
 
   stages {
 
@@ -25,9 +25,6 @@ pipeline {
 
     stage('Push Image') {
       steps{
-        //sh 'ping -c 3 registry'
-        sh 'cat /etc/hosts'
-
         script {
           docker.withRegistry( "" ) {
             dockerImage.push()
@@ -35,16 +32,4 @@ pipeline {
         }
       }
     }
-
-    stage('Deploy App') {
-      agent any
-      steps {
-        script {
-          kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "kubeconfig")
-        }
-      }
-    }
-
-  }
-
 }
