@@ -38,6 +38,11 @@ pipeline {
 
     stage('Deploy App') {
       steps {
+        agent {
+          node {
+              label 'master'
+          }
+        }
         script {
           kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "kubeconfig")
         }
