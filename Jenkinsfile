@@ -25,6 +25,7 @@ pipeline {
 
     stage('Push Image') {
       steps{
+        sh 'host registry'
         script {
           docker.withRegistry( "" ) {
             dockerImage.push()
