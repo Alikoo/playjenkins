@@ -1,38 +1,8 @@
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  labels:
-    app: myweb
-  name: myweb
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: myweb
-  template:
-    metadata:
-      labels:
-        app: myweb
-    spec:
-      containers:
-      - image: 172.17.0.2:5000/alikoo/web
-        imagePullPolicy: Always
-        name: myweb
-
----
 apiVersion: v1
-kind: Service
+kind: Pod
 metadata:
-  labels:
-    app: myweb
-  name: myweb
+  name: private-reg
 spec:
-  ports:
-  - nodePort: 32223
-    port: 80
-    protocol: TCP
-    targetPort: 80
-  selector:
-    app: myweb
-  type: NodePort
+  containers:
+  - name: private-reg-container
+    image: 172.19.0.2:5000/alikoo/myweb:1.0

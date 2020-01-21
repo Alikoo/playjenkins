@@ -5,7 +5,7 @@ pipeline {
     } 
 
   environment {
-    registry = "172.17.0.2:5000/alikoo/web"
+    registry = "172.19.0.2:5000/alikoo/myweb"
     dockerImage = ""
   }
 
