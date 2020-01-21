@@ -1,7 +1,7 @@
 pipeline {
 
   agent {
-        docker { image 'joao29a/jnlp-slave-alpine-docker' }
+        label 'ubuntu-slave-1'
     } 
 
   environment {
